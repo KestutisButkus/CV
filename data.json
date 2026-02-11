@@ -1,0 +1,58 @@
+{
+  "vardas": "Vardenis Pavardenis",
+  "pareigos": "IT / Python specialistas",
+  "kontaktai": [
+    "elektr.paštas.lt@gmail.com",
+    "+37000012345",
+    "Lietuva"
+  ],
+  "issilavinimas": [
+    {
+      "mokykla": "Code Academy",
+      "metai": "2024–2025",
+      "sritis": "Python ir AI"
+    },
+    {
+      "mokykla": "Kauno ryšininkų mokykla",
+      "metai": "2003–2004",
+      "sritis": "KT operatorius"
+    },
+    {
+      "mokykla": "Kauno prekybos ir verslo mokykla",
+      "metai": "1996–2003",
+      "sritis": "Elektronika"
+    }
+  ],
+  "kalbos": [
+    "Lietuvių – C",
+    "Rusų – B",
+    "Anglų – A"
+  ],
+  "igudziai": [
+    "Python, Django, APIs",
+    "Web Scraping",
+    "SQLite, PostgreSQL",
+    "Ubuntu Server, Nginx",
+    "GitHub",
+    "Elektronika, remontas",
+    "Photoshop, Premiere"
+  ],
+  "apie": "Esu DIY entuziastas turintis elektronikos ir IT išsilavinimą. Vertinu tvarką, tikslumą ir logiką. Dirbu su kompiuterine ir elektronine įranga, tinklais bei programine įranga. Mėgstu audio/video techniką, eksperimentuoju su kolonėlėmis, stiprintuvais, ekranų technologijomis. Python naudoju techninėms užduotims, automatizavimui ir praktiniams sprendimams.",
+  "patirtis": [
+    {
+      "imone": "UAB „Jungtis“",
+      "metai": "2004–2023",
+      "pareigos": "Apsaugos sistemų technikas, apsaugos pulto operatorius"
+    },
+    {
+      "imone": "UAB „Apsvidija“",
+      "metai": "2003–2004",
+      "pareigos": "Kompiuterinių tinklų administratorius"
+    }
+  ],
+  "papildoma": [
+    "B kategorijos vairuotojo pažymėjimas",
+    "Elektronikos praktinė patirtis",
+    "Projektų įgyvendinimas nuo idėjos iki realizacijos"
+  ]
+}
