@@ -1,9 +1,9 @@
 {
-  "vardas": "Vardenis Pavardenis",
-  "pareigos": "IT / Python specialistas",
+  "vardas": "Kęstutis Butkus",
+  "pareigos": "IT / Python / Technikas",
   "kontaktai": [
-    "elektr.paštas.lt@gmail.com",
-    "+37000012345",
+    "kestutis.butkus.lt@gmail.com",
+    "+37061417943",
     "Lietuva"
   ],
   "issilavinimas": [
@@ -42,7 +42,7 @@
     {
       "imone": "UAB „Jungtis“",
       "metai": "2004–2023",
-      "pareigos": "Apsaugos sistemų technikas, apsaugos pulto operatorius"
+      "pareigos": "Apsaugos sistemų technikas, vyresnysis apsaugos pulto operatorius"
     },
     {
       "imone": "UAB „Apsvidija“",
