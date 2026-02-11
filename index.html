@@ -6,120 +6,7 @@
     <title>CV</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <style>
-        body {
-            background: #eef1f5;
-            color: #1f2a44;
-            font-family: "Inter", "Segoe UI", sans-serif;
-        }
-
-        .top-bar {
-            max-width: 950px;
-            margin: 20px auto 0 auto;
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-        }
-
-        .cv-container {
-            max-width: 950px;
-            margin: 10px auto 20px auto;
-            background: #ffffff;
-            border-radius: 14px;
-            overflow: hidden;
-            box-shadow: 0 4px 28px rgba(0,0,0,0.08);
-        }
-
-        .left-panel {
-            background: #1f2a44;
-            color: #ffffff;
-            padding: 40px 35px;
-        }
-
-        .left-panel h3 {
-            font-size: 1.2rem;
-            margin-top: 30px;
-            margin-bottom: 15px;
-            font-weight: 600;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-            padding-bottom: 5px;
-        }
-
-        .profile-photo {
-            width: 154px;
-            height: 154px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid rgba(255,255,255,0.25);
-            margin-bottom: 15px;
-        }
-
-        .right-panel {
-            padding: 40px 50px;
-            color: #1f2a44;
-        }
-
-        .section-title {
-            font-size: 1.3rem;
-            margin-top: 35px;
-            font-weight: 600;
-            color: #1f2a44;
-        }
-
-        .line {
-            height: 2px;
-            width: 60px;
-            background: #1f2a44;
-            margin: 6px 0 20px 0;
-        }
-
-        .info-list, .info-list li {
-            padding-left: 0;
-            list-style: none;
-            margin-bottom: 10px;
-        }
-
-        .skills-list {
-            padding-left: 0;
-            list-style: none;
-        }
-
-        .skills-list li {
-            margin-bottom: 6px;
-        }
-
-        @media (max-width: 768px) {
-            .cv-container {
-                margin: 10px;
-                border-radius: 10px;
-            }
-
-            .left-panel {
-                padding: 25px 20px;
-                text-align: center;
-            }
-
-            .right-panel {
-                padding: 25px 20px;
-            }
-
-            .profile-photo {
-                width: 130px;
-                height: 130px;
-            }
-
-            .section-title {
-                font-size: 0.85rem;
-                text-align: center;
-            }
-
-            .line {
-                margin-left: auto;
-                margin-right: auto;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -132,9 +19,7 @@
         <option value="cv3.json">CV 3</option>
     </select>
 
-    <button id="pdfBtn" class="btn btn-sm btn-primary">
-        PDF
-    </button>
+    <button id="pdfBtn" class="btn btn-sm btn-primary">PDF</button>
 </div>
 
 <!-- CV -->
@@ -145,8 +30,8 @@
         <div class="text-center">
             <img src="as.png" class="profile-photo" alt="photo">
 
-            <h2 id="vardas" class="mt-2" style="font-size: 1.4rem; font-weight: 600;"></h2>
-            <div id="pareigos" style="opacity: 0.85;"></div>
+            <h4 id="vardas" class="vardas"></h4>
+            <div id="pareigos" class="pareigos"></div>
         </div>
 
         <h3>Kontaktai</h3>
@@ -157,24 +42,21 @@
 
         <h3>Kalbos</h3>
         <ul id="kalbos" class="info-list"></ul>
-
-        <h3>Įgūdžiai</h3>
-        <ul id="igudziai" class="skills-list"></ul>
     </div>
 
     <!-- RIGHT PANEL -->
     <div class="col-md-8 right-panel">
 
         <div class="section-title">Apie mane</div>
-        <div class="line"></div>
         <p id="apie"></p>
 
         <div class="section-title">Darbo patirtis</div>
-        <div class="line"></div>
         <div id="patirtis"></div>
 
+        <div class="section-title">Įgūdžiai</div>
+        <ul id="igudziai" class="skills-list"></ul>
+
         <div class="section-title">Papildoma</div>
-        <div class="line"></div>
         <ul id="papildoma"></ul>
 
     </div>
@@ -183,63 +65,67 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <script>
-function fillCV(data) {
-    document.getElementById('vardas').textContent = data.vardas;
-    document.getElementById('pareigos').textContent = data.pareigos;
+    function fillCV(data) {
+        document.getElementById('vardas').textContent = data.vardas;
+        document.getElementById('pareigos').textContent = data.pareigos;
 
-    document.getElementById('kontaktai').innerHTML =
-        data.kontaktai.map(x => `<li>${x}</li>`).join('');
+        document.getElementById('kontaktai').innerHTML =
+            data.kontaktai.map(x => `<li>${x}</li>`).join('');
 
-    document.getElementById('issilavinimas').innerHTML =
-        data.issilavinimas.map(x =>
-            `<li><strong>${x.mokykla}</strong><br>${x.metai}<br>${x.sritis}</li>`
-        ).join('');
+        document.getElementById('issilavinimas').innerHTML =
+            data.issilavinimas.map(x =>
+                `<li><strong>${x.mokykla}</strong><br>${x.metai}<br>${x.sritis}</li>`
+            ).join('');
 
-    document.getElementById('kalbos').innerHTML =
-        data.kalbos.map(x => `<li>${x}</li>`).join('');
+        document.getElementById('kalbos').innerHTML =
+            data.kalbos.map(x => `<li>${x}</li>`).join('');
 
-    document.getElementById('igudziai').innerHTML =
-        data.igudziai.map(x => `<li>${x}</li>`).join('');
+        document.getElementById('igudziai').innerHTML =
+            data.igudziai.map(x => `<li>${x}</li>`).join('');
 
-    document.getElementById('apie').textContent = data.apie;
+        document.getElementById('apie').textContent = data.apie;
 
-    document.getElementById('patirtis').innerHTML =
-        data.patirtis.map(x =>
-            `<p><strong>${x.imone}</strong><br>${x.metai}<br>${x.pareigos}</p>`
-        ).join('');
+        document.getElementById('patirtis').innerHTML =
+            data.patirtis.map(x =>
+                `<p><strong>${x.imone}</strong><br>${x.metai}<br>${x.pareigos}</p>`
+            ).join('');
 
-    document.getElementById('papildoma').innerHTML =
-        data.papildoma.map(x => `<li>${x}</li>`).join('');
-}
+        document.getElementById('papildoma').innerHTML =
+            data.papildoma.map(x => `<li>${x}</li>`).join('');
+    }
 
-function loadCV(file) {
+    function loadCV(file) {
     fetch(file)
-        .then(r => r.json())
-        .then(data => fillCV(data));
+        .then(r => {
+            if (!r.ok) throw new Error('Nepavyko įkelti CV');
+            return r.json();
+        })
+        .then(data => fillCV(data))
+        .catch(err => console.error('Klaida:', err));
 }
 
-document.getElementById("pdfBtn").onclick = () => {
-    const element = document.querySelector(".cv-container");
+    document.getElementById("pdfBtn").onclick = () => {
+        const element = document.querySelector(".cv-container");
 
-    const opt = {
-        margin:       0,
-        filename:     'CV.pdf',
-        image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2, useCORS: true },
-        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        const opt = {
+            margin: 0,
+            filename: 'CV.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        html2pdf().set(opt).from(element).save();
     };
 
-    html2pdf().set(opt).from(element).save();
-};
+    document.getElementById("cvSelect").onchange = (e) => {
+        loadCV(e.target.value);
+        localStorage.setItem("cvFile", e.target.value);
+    };
 
-document.getElementById("cvSelect").onchange = (e) => {
-    loadCV(e.target.value);
-    localStorage.setItem("cvFile", e.target.value);
-};
-
-const savedCV = localStorage.getItem("cvFile") || "cv1.json";
-document.getElementById("cvSelect").value = savedCV;
-loadCV(savedCV);
+    const savedCV = localStorage.getItem("cvFile") || "cv1.json";
+    document.getElementById("cvSelect").value = savedCV;
+    loadCV(savedCV);
 </script>
 
 </body>

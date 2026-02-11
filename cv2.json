@@ -1,6 +1,6 @@
 {
   "vardas": "Kęstutis Butkus",
-  "pareigos": "Programuotojas / Python",
+  "pareigos": "IT / Technikas",
   "kontaktai": [
     "kestutis.butkus.lt@gmail.com",
     "+37061417943",
@@ -29,15 +29,16 @@
     "Anglų – A"
   ],
   "igudziai": [
-    "Python, Django, APIs",
-    "Web Scraping",
-    "SQLite, PostgreSQL",
-    "Ubuntu Server, Nginx",
-    "GitHub",
+    "Kompiuterių surinkimas, atnajinimas",
+    "Programinės įrangos diegimas, konfigūravimas",
+    "Vietiniai tinklai: kabeliavimas, konfiguravimas",
+    "Metalo, medžio apdirbimas",
+    "Baldų gamyba",
     "Elektronika, remontas",
-    "Photoshop, Premiere"
+    "Photoshop, Premiere",
+    "Django, Power apps"
   ],
-  "apie": "Esu DIY entuziastas turintis elektronikos ir IT išsilavinimą. Vertinu tvarką, tikslumą ir logiką. Dirbu su kompiuterine ir elektronine įranga, tinklais bei programine įranga. Mėgstu audio/video techniką, eksperimentuoju su kolonėlėmis, stiprintuvais, ekranų technologijomis. Python naudoju techninėms užduotims, automatizavimui ir praktiniams sprendimams.",
+  "apie": "Esu DIY entuziastas turintis elektronikos ir IT išsilavinimą. Vertinu tvarką, tikslumą ir logiką. Dirbu su kompiuterine ir elektronine įranga, tinklais bei programine įranga. Python naudoju techninėms užduotims, automatizavimui ir praktiniams sprendimams.",
   "patirtis": [
     {
       "imone": "UAB „Jungtis“",
