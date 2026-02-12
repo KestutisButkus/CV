@@ -13,18 +13,6 @@ body {
     gap: 10px;
 }
 
-/* MAIN CV CONTAINER */
-.cv-container {
-    width: 794px;
-    min-height: 1122px;
-    max-height: 1122px; /* svarbu */
-    margin: 0 auto;
-    background: #ffffff;
-    border-radius: 0px;
-    overflow: hidden;
-    box-shadow: 0 4px 28px rgba(0,0,0,0.08);
-}
-
 /* LEFT PANEL */
 .left-panel {
     background: #2e5d7f;
@@ -228,5 +216,17 @@ body {
     .right-panel li {
         font-size: 0.9rem;
         line-height: 1.25;
+    }
+
+    /* MAIN CV CONTAINER */
+    .cv-container {
+        width: 794px;
+        min-height: 1122px;
+        max-height: 1122px; /* svarbu */
+        margin: 0 auto;
+        background: #ffffff;
+        border-radius: 0px;
+        overflow: hidden;
+        box-shadow: 0 4px 28px rgba(0,0,0,0.08);
     }
 }
