@@ -15,9 +15,10 @@ body {
 
 /* MAIN CV CONTAINER */
 .cv-container {
-    max-width: 800px;
-    min-height: 1000px;
-    margin: 10px auto 20px auto;
+    width: 794px;
+    min-height: 1122px;
+    max-height: 1122px; /* svarbu */
+    margin: 0 auto;
     background: #ffffff;
     border-radius: 0px;
     overflow: hidden;
@@ -86,6 +87,30 @@ body {
     color: #ffffff;
     display: block;
     font-size: 1rem;
+}
+
+/* Contact links */
+.left-panel a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/* Social icons */
+.social-icons {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.social-icon {
+    width: 32px;
+    height: 32px;
+    transition: transform 0.2s;
+    filter: drop-shadow(0 0 3px rgba(255,255,255,0.6));
+}
+
+.social-icon:hover {
+    transform: scale(1.2);
 }
 
 /* WORK EXPERIENCE */
@@ -181,6 +206,13 @@ body {
 
     .skills-list {
         grid-template-columns: 1fr;
+    }
+
+    .social-icons {
+        display: flex;
+        gap: 12px;
+        margin-top: 20px;
+        justify-content: center;
     }
 }
 

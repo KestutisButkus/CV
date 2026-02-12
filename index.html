@@ -14,9 +14,9 @@
 <!-- TOP BAR -->
 <div class="top-bar">
     <select id="cvSelect" class="form-select form-select-sm" style="width:150px;">
-        <option value="cv1.json">CV 1</option>
-        <option value="cv2.json">CV 2</option>
-        <option value="cv3.json">CV 3</option>
+        <option value="cv1">CV 1</option>
+        <option value="cv2">CV 2</option>
+        <option value="cv3">CV 3</option>
     </select>
 
     <button id="pdfBtn" class="btn btn-sm btn-primary">PDF</button>
@@ -63,46 +63,106 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
 <script>
-    function fillCV(data) {
-        document.getElementById('vardas').textContent = data.vardas;
-        document.getElementById('pareigos').textContent = data.pareigos;
-
-        document.getElementById('kontaktai').innerHTML =
-            data.kontaktai.map(x => `<li>${x}</li>`).join('');
-
-        document.getElementById('issilavinimas').innerHTML =
-            data.issilavinimas.map(x =>
-                `<li><strong>${x.mokykla}</strong><br>${x.metai}<br>${x.sritis}</li>`
-            ).join('');
-
-        document.getElementById('kalbos').innerHTML =
-            data.kalbos.map(x => `<li>${x}</li>`).join('');
-
-        document.getElementById('igudziai').innerHTML =
-            data.igudziai.map(x => `<li>${x}</li>`).join('');
-
-        document.getElementById('apie').textContent = data.apie;
-
-        document.getElementById('patirtis').innerHTML =
-            data.patirtis.map(x =>
-                `<p><strong>${x.imone}</strong><br>${x.metai}<br>${x.pareigos}</p>`
-            ).join('');
-
-        document.getElementById('papildoma').innerHTML =
-            data.papildoma.map(x => `<li>${x}</li>`).join('');
+    function parseCSV(text) {
+        return Papa.parse(text, { 
+            header: true, 
+            skipEmptyLines: true 
+        }).data;
     }
 
-    function loadCV(file) {
-    fetch(file)
-        .then(r => {
-            if (!r.ok) throw new Error('Nepavyko įkelti CV');
-            return r.json();
-        })
-        .then(data => fillCV(data))
-        .catch(err => console.error('Klaida:', err));
-}
+    function fillCV(cvName) {
+        // Load main info
+        fetch(cvName + '_info.csv')
+            .then(r => r.text())
+            .then(text => {
+                const data = parseCSV(text)[0]; // First row
+                document.getElementById('vardas').textContent = data.vardas || '';
+                document.getElementById('pareigos').textContent = data.pareigos || '';
+                document.getElementById('apie').textContent = data.apie || '';
+            })
+            .catch(err => console.error('Info klaida:', err));
+
+        // Load contacts
+        fetch(cvName + '_kontaktai.csv')
+            .then(r => r.text())
+            .then(text => {
+                const data = parseCSV(text);
+
+                const regular = data.filter(x => x.tipas === 'tekst');
+                const social  = data.filter(x => x.tipas === 'linkedin' || x.tipas === 'github');
+
+                const regularHTML = regular.map(x => `<li>${x.kontaktas || ''}</li>`).join('');
+
+                const socialHTML = social.length ? `
+                    <li class="social-icons">
+                        ${social.map(x => `
+                            <a href="${x.kontaktas || '#'}" target="_blank">
+                                <img src="${x.tipas}.png" alt="${x.tipas}" class="social-icon">
+                            </a>
+                        `).join('')}
+                    </li>` : '';
+
+                document.getElementById('kontaktai').innerHTML = regularHTML + socialHTML;
+            })
+            .catch(err => console.error('Kontaktai klaida:', err));
+
+        // Load education
+        fetch(cvName + '_issilavinimas.csv')
+            .then(r => r.text())
+            .then(text => {
+                const data = parseCSV(text);
+                document.getElementById('issilavinimas').innerHTML =
+                    data.map(x =>
+                        `<li><strong>${x.mokykla || ''}</strong><br>${x.metai || ''}<br>${x.sritis || ''}</li>`
+                    ).join('');
+            })
+            .catch(err => console.error('Išsilavinimas klaida:', err));
+
+        // Load languages
+        fetch(cvName + '_kalbos.csv')
+            .then(r => r.text())
+            .then(text => {
+                const data = parseCSV(text);
+                document.getElementById('kalbos').innerHTML =
+                    data.map(x => `<li>${x.kalba || ''}</li>`).join('');
+            })
+            .catch(err => console.error('Kalbos klaida:', err));
+
+        // Load work experience
+        fetch(cvName + '_patirtis.csv')
+            .then(r => r.text())
+            .then(text => {
+                const data = parseCSV(text);
+                document.getElementById('patirtis').innerHTML =
+                    data.map(x =>
+                        `<p><strong>${x.imone || ''}</strong><br>${x.metai || ''}<br>${x.pareigos || ''}</p>`
+                    ).join('');
+            })
+            .catch(err => console.error('Patirtis klaida:', err));
+
+        // Load skills
+        fetch(cvName + '_igudziai.csv')
+            .then(r => r.text())
+            .then(text => {
+                const data = parseCSV(text);
+                document.getElementById('igudziai').innerHTML =
+                    data.map(x => `<li>${x.igudis || ''}</li>`).join('');
+            })
+            .catch(err => console.error('Įgūdžiai klaida:', err));
+
+        // Load additional
+        fetch(cvName + '_papildoma.csv')
+            .then(r => r.text())
+            .then(text => {
+                const data = parseCSV(text);
+                document.getElementById('papildoma').innerHTML =
+                    data.map(x => `<li>${x.info || ''}</li>`).join('');
+            })
+            .catch(err => console.error('Papildoma klaida:', err));
+    }
 
     document.getElementById("pdfBtn").onclick = () => {
         const element = document.querySelector(".cv-container");
@@ -119,13 +179,13 @@
     };
 
     document.getElementById("cvSelect").onchange = (e) => {
-        loadCV(e.target.value);
+        fillCV(e.target.value);
         localStorage.setItem("cvFile", e.target.value);
     };
 
-    const savedCV = localStorage.getItem("cvFile") || "cv1.json";
+    const savedCV = localStorage.getItem("cvFile") || "cv1";
     document.getElementById("cvSelect").value = savedCV;
-    loadCV(savedCV);
+    fillCV(savedCV);
 </script>
 
 </body>
