@@ -184,9 +184,8 @@
         localStorage.setItem("cvFile", e.target.value);
     };
 
-    const savedCV = localStorage.getItem("cvFile") || "cv1";
+    const savedCV = localStorage.getItem("cvFile") || "cv2";
     document.getElementById("cvSelect").value = savedCV;
-    fillCV(savedCV);
 </script>
 
 </body>
